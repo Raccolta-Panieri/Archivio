@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Redirecting…</title>
+  <style>
+    html,body{margin:0;height:100%;background:#fff}
+    #m{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:Arial,Helvetica,sans-serif;transition:opacity .02s linear}
+    #m.hidden{opacity:0!important;pointer-events:none}
+  </style>
+</head>
+<body>
+  <div id="m" aria-hidden="true">Reindirizzamento in corso…</div>
+
+  <script>
+    (function(){
+      var dest = "https://linktr.ee/ECampus8?utm_source=linktree_profile_share&ltsid=7656f718-af0a-4223-ac91-4d1e51923571"; // <-- SOSTITUISCI qui con il tuo URL definitivo
+      try {
+        // nascondi l'interfaccia immediatamente
+        document.getElementById('m').classList.add('hidden');
+
+        // prima prova a cambiare l'intera finestra (top). Questo navigherà la scheda del browser.
+        try {
+          // Se siamo in iframe e il browser lo consente, questo navigherà il top window.
+          if (window.top && window.top !== window.self) {
+            window.top.location.replace(dest);
+            return;
+          }
+        } catch(eTop) {
+          // alcuni contesti cross-origin possono fare throw; lo ignoriamo e procediamo col fallback
+        }
+
+        // fallback: naviga la finestra corrente / iframe
+        setTimeout(function(){
+          try { window.location.replace(dest); }
+          catch(e){ window.location.href = dest; }
+        }, 20);
+      } catch(e) {
+        // fallback finale
+        window.location.href = dest;
+      }
