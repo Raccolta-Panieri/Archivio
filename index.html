@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- meta-refresh primario: molto affidabile quando la pagina è aperta direttamente -->
+  <meta http-equiv="refresh" content="0; url=https://linktr.ee/ECampus8?utm_source=linktree_profile_share&ltsid=7656f718-af0a-4223-ac91-4d1e51923571">
   <title>Redirecting…</title>
   <style>
     html,body{margin:0;height:100%;background:#fff}
@@ -15,28 +17,32 @@
 
   <script>
     (function(){
-      var dest = "https://linktr.ee/ECampus8?utm_source=linktree_profile_share&ltsid=7656f718-af0a-4223-ac91-4d1e51923571"; // <-- SOSTITUISCI qui con il tuo URL definitivo
+      var dest = "https://linktr.ee/ECampus8?utm_source=linktree_profile_share&ltsid=7656f718-af0a-4223-ac91-4d1e51923571";
       try {
-        // nascondi l'interfaccia immediatamente
-        document.getElementById('m').classList.add('hidden');
+        // nascondi il messaggio (se presente)
+        var m = document.getElementById('m');
+        if(m) m.classList.add('hidden');
 
-        // prima prova a cambiare l'intera finestra (top). Questo navigherà la scheda del browser.
+        // prova a navigare il top (preferibile)
         try {
-          // Se siamo in iframe e il browser lo consente, questo navigherà il top window.
           if (window.top && window.top !== window.self) {
             window.top.location.replace(dest);
             return;
           }
-        } catch(eTop) {
-          // alcuni contesti cross-origin possono fare throw; lo ignoriamo e procediamo col fallback
+        } catch(e) {
+          // cross-origin o blocco: prosegui con fallback
         }
 
-        // fallback: naviga la finestra corrente / iframe
+        // fallback: naviga la finestra corrente
         setTimeout(function(){
           try { window.location.replace(dest); }
           catch(e){ window.location.href = dest; }
         }, 20);
       } catch(e) {
-        // fallback finale
+        // fallback definitivo
         window.location.href = dest;
       }
+    })();
+  </script>
+</body>
+</html>
